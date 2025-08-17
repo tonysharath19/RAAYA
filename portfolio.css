@@ -1,0 +1,394 @@
+/* -------------------------------
+   Global Styles
+--------------------------------*/
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+    color: #cba135;
+
+    /* Make body take full height and allow footer to stick */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+
+/* -------------------------------
+   Header
+--------------------------------*/
+.header {
+    width: 100%;
+    background-color: #111;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo { height: 50px; }
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    background: #cba135;
+    border-radius: 2px;
+}
+
+/* Home Button */
+.home-button {
+    background-color: #cba135;
+    color: #111;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 2px solid #cba135;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.home-button:hover { background-color: #d4b04c; }
+
+/* -------------------------------
+   Blur Layer (for menu)
+--------------------------------*/
+.page-content {
+    margin-top: 80px;
+}
+
+/* -------------------------------
+   Portfolio Container
+--------------------------------*/
+.portfolio-container {
+    max-width: 1100px;
+    margin: 80px auto 60px auto;
+    padding: 0 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portfolio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #cba135;
+    margin: 0.5rem 0 1rem 0;
+    max-width: 700px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* -------------------------------
+   Category Cards - ENHANCED
+--------------------------------*/
+.category-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.category-card {
+    background-color: #111;
+    color: #cba135;
+    padding: 1.5rem 3rem;
+    border-radius: 60px;
+    border: 2px solid #cba135;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-width: 250px;
+    font-size: 1.3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(203,161,53,0.4);
+    background-color: #cba135;
+    color: #111;
+}
+
+/* -------------------------------
+   Event Cards - ENHANCED
+--------------------------------*/
+.event-cards {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.category-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    color: #cba135;
+    margin: 1rem 0;
+    text-align: center;
+    max-width: 700px;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    justify-items: center;
+}
+
+.event-card, .category-card {
+    width: 100%;
+    max-width: 300px;
+    border: 2px solid #cba135;
+    border-radius: 50px;
+    padding: 1.5rem 2rem;
+    background-color: #111;
+    color: #cba135;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.2rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Shimmer animation */
+.hover-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(203,161,53,0.3);
+    transform: skewX(-25deg);
+    animation: shimmer-click 1s forwards;
+}
+
+@keyframes shimmer-click { 
+    0% { left: -75%; } 
+    100% { left: 125%; } 
+}
+
+.back-button {
+    background-color: #cba135; /* Gold background */
+    color: #111; /* Black text */
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 2px solid #cba135; /* Optional: keep border same color */
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.back-button::before {
+    content: "←";
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #cba135;
+    color: #111;
+    transform: translateX(-5px);
+}
+
+/* -------------------------------
+   Main (Content Wrapper)
+--------------------------------*/
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* -------------------------------
+   Footer
+--------------------------------*/
+.footer {
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: auto;
+    background: #000;
+    color: #cba135;
+    border-top: 1px solid #cba135;
+}
+
+/* -------------------------------
+   Hamburger Menu Overlay - ENHANCED
+--------------------------------*/
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background-color: #111;
+    color: #cba135;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.4s ease;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+}
+
+.overlay-menu.active {
+    left: 0;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 90%;
+    max-width: 400px;
+}
+
+.menu-button {
+    background-color: transparent;
+    color: #cba135;
+    border: 2px solid #cba135;
+    padding: 1.5rem 3rem;
+    border-radius: 60px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.8rem;
+    width: 100%;
+    min-height: 70px;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: #cba135;
+    color: #111;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
+}
+
+/* Close Menu - ENHANCED */
+.close-menu {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    color: #cba135;
+    font-size: 3rem;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close-menu:hover {
+    background-color: rgba(203, 161, 53, 0.1);
+}
+
+/* Blur styles are handled by styles.css */
+
+/* -------------------------------
+   Responsive - ENHANCED
+--------------------------------*/
+@media (max-width: 768px) {
+    .portfolio-container { 
+        margin-top: 80px; 
+        padding: 2rem 1rem; 
+    }
+    
+    .category-cards { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 1rem;
+    }
+    
+    .event-grid { 
+        grid-template-columns: 1fr; 
+        gap: 1rem;
+    }
+    
+    .category-card, .event-card { 
+        min-width: 280px; 
+        font-size: 1.2rem; 
+        margin: 0.5rem 0; 
+        padding: 1.2rem 2rem;
+    }
+    
+    .menu-button {
+        font-size: 1.6rem;
+        padding: 1.2rem 2.5rem;
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay-content {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    .menu-button {
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
+        min-height: 55px;
+    }
+    
+    .category-card, .event-card {
+        min-width: 250px;
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+    }
+}

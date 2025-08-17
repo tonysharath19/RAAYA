@@ -1,0 +1,58 @@
+/* About Page Styles */
+
+.about-container {
+    max-width: 900px;
+    margin: 120px auto 60px auto;
+    padding: 0 2rem;
+    text-align: justify;
+}
+
+.about-title {
+    font-family: 'Libertinus Sans', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    text-align: center;
+    color: var(--gold);
+}
+
+.about-text {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    text-align: justify;
+}
+
+/* Responsive adjustments for About page */
+@media (max-width: 768px) {
+    .about-container {
+        margin: 100px auto 40px auto;
+        padding: 0 1.5rem;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .about-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        margin: 80px auto 30px auto;
+        padding: 0 1rem;
+    }
+    
+    .about-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-text {
+        font-size: 0.9rem;
+    }
+}

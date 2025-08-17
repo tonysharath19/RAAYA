@@ -1,0 +1,500 @@
+/* ===============================
+   Variables
+================================ */
+:root {
+    --gold: #CBA135;         /* Rich luxurious gold */
+    --gold-hover: #B79027;   /* Darker gold for hover */
+    --text-light: #f5f5dc;   /* Off-white for body text */
+}
+
+/* ===============================
+   Reset & Base Styles
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    background-color: #111;
+    color: var(--gold);
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ===============================
+   Header
+================================ */
+.header {
+    width: 100%;
+    background-color: #111;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(203,161,53,0.1);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 50px;
+    filter: brightness(0) invert(1);
+}
+
+.home-button {
+    background-color: var(--gold);
+    color: #111;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.home-button:hover {
+    background-color: var(--gold-hover);
+}
+
+/* ===============================
+   Hamburger Menu
+================================ */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--gold);
+    transition: all 0.3s ease;
+}
+
+/* ===============================
+   Overlay Side Menu - 50% width
+================================ */
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background-color: #111;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.4s ease;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+}
+
+.overlay-menu.active {
+    left: 0;
+}
+
+/* Blur background when menu active */
+.page-content.blur {
+    filter: blur(5px);
+    transition: filter 0.3s;
+}
+
+/* Close button - ENHANCED */
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close-menu:hover {
+    background-color: rgba(203, 161, 53, 0.1);
+}
+
+/* Overlay content - ENHANCED with larger buttons */
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 80%;
+    max-width: 350px;
+}
+
+/* Enhanced menu buttons - LARGER AND MORE ACCESSIBLE */
+.menu-button {
+    font-size: 1.6rem;
+    padding: 1.2rem 2.5rem;
+    background: var(--gold);
+    color: #111;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    width: 100%;
+    min-height: 65px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(203, 161, 53, 0.3);
+}
+
+.menu-button:hover {
+    background-color: var(--gold-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
+}
+
+.menu-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(203, 161, 53, 0.3);
+}
+
+/* ===============================
+   Hero Section
+================================ */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    padding: 0 2rem;
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.hero-subtext {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* Hero Buttons */
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-gold {
+    background-color: var(--gold);
+    color: #111;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-gold:hover {
+    background-color: var(--gold-hover);
+    color: #111;
+}
+
+.btn-black {
+    background-color: #111;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-black:hover {
+    background-color: var(--gold);
+    color: #111;
+}
+
+/* ===============================
+   About Section
+================================ */
+.about-container {
+    max-width: 900px;
+    margin: 120px auto 60px auto;
+    padding: 0 2rem;
+    text-align: justify;
+}
+
+.about-title {
+    font-family: 'Libertinus Sans', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    text-align: center;
+    color: var(--gold);
+}
+
+.about-text {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    text-align: justify;
+}
+
+/* ===============================
+   Services Section
+================================ */
+.services-container {
+    max-width: 1100px;
+    margin: 120px auto 60px auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.services-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--gold);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* ===============================
+   Service Cards with Shimmer
+================================ */
+.service-card {
+    background: #222;
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(203,161,53,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: var(--text-light);
+}
+
+/* Shimmer animation */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(203,161,53,0) 0%,
+        rgba(203,161,53,0.4) 50%,
+        rgba(203,161,53,0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -75%; }
+    100% { left: 125%; }
+}
+
+/* Hover effect */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(203,161,53,0.4);
+}
+
+.service-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+}
+
+.service-card p {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    position: relative;
+    z-index: 1;
+}
+
+/* Services Button */
+.btn-primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--gold);
+    color: #111;
+    text-decoration: none;
+    border-radius: 50px;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--gold-hover);
+}
+
+.services-tagline {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* ===============================
+   Footer
+================================ */
+.footer {
+    background-color: #111;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: var(--gold);
+}
+
+/* ===============================
+   Scroll Animation
+================================ */
+.hero, .about-container, .services-container, .service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scrolled {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===============================
+   Responsive Styles
+================================ */
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+    
+    .home-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtext {
+        font-size: 1.1rem;
+    }
+    
+    .about-title, .services-title {
+        font-size: 2rem;
+    }
+    
+    .about-text, .service-card p {
+        font-size: 1rem;
+    }
+    
+    .services-grid {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-subtext {
+        font-size: 1rem;
+    }
+    .about-title, .services-title {
+        font-size: 1.8rem;
+    }
+    .menu-button {
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    .hero-subtext {
+        font-size: 0.95rem;
+    }
+    .about-title, .services-title {
+        font-size: 1.5rem;
+    }
+    .about-text, .service-card p {
+        font-size: 0.9rem;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .home-button {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    .menu-button {
+        font-size: 1.3rem;
+        padding: 0.9rem 1.8rem;
+        min-height: 55px;
+    }
+}
+
+/* Hamburger Animation */
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}

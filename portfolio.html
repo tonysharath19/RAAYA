@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Luxury Digital Invitations</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="portfolio.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-content">
+
+    <!-- Global Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></div>
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/150x50/333/fff?text=LOGO" alt="Logo" class="logo">
+            </div>
+            <button class="home-button" data-link="index.html">Home</button>
+        </div>
+    </header>
+
+    <main class="portfolio-container">
+        <h1 class="portfolio-title">Portfolio</h1>
+        <p class="portfolio-intro">
+            Explore our curated collections of personal and corporate event invitations. Click on a category to view beautifully crafted designs tailored for your special occasion.
+        </p>
+
+        <!-- Category Cards -->
+        <div class="category-cards">
+            <div class="category-card" data-category="personal">Personal Events</div>
+            <div class="category-card" data-category="corporate">Corporate & Professional Events</div>
+        </div>
+
+        <!-- Event Cards -->
+        <div class="event-cards">
+            <p class="category-description"></p>
+            <button class="back-button">Back to Categories</button>
+            <div class="event-grid"></div>
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+
+</div> <!-- /.page-content -->
+
+<!-- Hamburger Menu Overlay -->
+<nav class="overlay-menu" id="overlayMenu">
+    <button class="close-menu" id="closeMenu">&times;</button>
+    <div class="overlay-content">
+        <button class="menu-button" data-link="about.html">About Us</button>
+        <button class="menu-button" data-link="services.html">Services</button>
+        <button class="menu-button" data-link="portfolio.html">Portfolio</button>
+        <button class="menu-button" data-link="contact.html">Contact</button>
+    </div>
+</nav>
+
+<script src="portfolio.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

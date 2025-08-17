@@ -1,0 +1,176 @@
+/* Contact page specific styles */
+.page-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: #111;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: #111;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.contact-container.scrolled {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-content-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+.contact-container h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.contact-container p {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1rem auto 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    padding: 0 1rem;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 2px solid var(--gold);
+    border-radius: 50px;
+    color: var(--gold);
+    background: transparent;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-btn i {
+    font-size: 1.1rem;
+}
+
+.contact-btn .fa-envelope {
+    color: #D44638;
+}
+
+.contact-btn .fa-phone {
+    color: #4285F4;
+}
+
+.contact-btn .fa-whatsapp {
+    color: #25D366;
+}
+
+.contact-btn .fa-instagram {
+    color: #E4405F;
+}
+
+.contact-btn:hover i {
+    color: #111;
+}
+
+.contact-btn:hover {
+    background: var(--gold);
+    color: #111;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(203, 161, 53, 0.4);
+}
+
+.contact-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(203, 161, 53, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .contact-container {
+        padding: 1.5rem;
+    }
+    
+    .contact-container h1 {
+        font-size: 2rem;
+    }
+    
+    .contact-container p {
+        font-size: 1.1rem;
+    }
+    
+    .contact-options {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .contact-btn {
+        font-size: 1rem;
+        padding: 0.9rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 0.5rem;
+    }
+    
+    .contact-container {
+        padding: 1rem;
+    }
+    
+    .contact-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-container p {
+        font-size: 1rem;
+    }
+    
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+    }
+}
