@@ -29,12 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
             "Corporate Party / Gala Night",
             "Conferences / Seminars",
             "Award Functions"
+        ],
+        demo: [
+            "Interactive Demo",
+            "Live Preview",
+            "Sample Designs",
+            "Feature Showcase"
         ]
     };
 
     const categoryDescriptions = {
         personal: "Curated collections of personal event invitations to celebrate your intimate and joyous moments.",
-        corporate: "Professional and stylish corporate invitations tailored for your business and formal events."
+        corporate: "Professional and stylish corporate invitations tailored for your business and formal events.",
+        demo: "Interactive demonstrations and sample designs showcasing our digital invitation capabilities."
     };
 
     function createEventCard(name) {
