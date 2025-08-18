@@ -1,9 +1,33 @@
 // Demo page specific JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the demo button
+    // Get all demo buttons
+    const birthdayButton = document.getElementById('birthdayButton');
+    const engagementButton = document.getElementById('engagementButton');
+    const weddingButton = document.getElementById('weddingButton');
+    const houseWarmingButton = document.getElementById('houseWarmingButton');
     const ecardButton = document.getElementById('ecardButton');
     
-    // Add click event listener to the button
+    // Birthday button redirect
+    birthdayButton.addEventListener('click', function() {
+        window.location.href = 'https://birthday-demo.onrender.com';
+    });
+    
+    // Engagement button redirect
+    engagementButton.addEventListener('click', function() {
+        window.location.href = 'https://engagement-invite.onrender.com';
+    });
+    
+    // Wedding button redirect
+    weddingButton.addEventListener('click', function() {
+        window.location.href = 'https://wedding-demo.onrender.com';
+    });
+    
+    // House Warming button redirect
+    houseWarmingButton.addEventListener('click', function() {
+        window.location.href = 'https://house-warming-demo.onrender.com';
+    });
+    
+    // E-card button functionality (existing)
     ecardButton.addEventListener('click', function() {
         // Create a simple alert for now (can be expanded later)
         alert('E-card & Video Invites feature coming soon!');
@@ -12,16 +36,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // window.location.href = 'demo-gallery.html';
     });
     
-    // Add some interactive hover effects
-    ecardButton.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
+    // Add interactive hover effects for all buttons
+    const allButtons = document.querySelectorAll('.demo-button');
+    allButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
     });
     
-    ecardButton.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-    
-    // Add loading state simulation
+    // Add loading state simulation for ecard button only
     ecardButton.addEventListener('click', function() {
         const originalText = this.textContent;
         this.textContent = 'Loading...';
