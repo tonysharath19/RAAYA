@@ -75,7 +75,7 @@ button { font-family: inherit; cursor: pointer; border: none; outline: none; }
    Blur Layer (for menu)
 --------------------------------*/
 .page-content {
-    margin-top: 80px;
+    /* margin-top: 80px; */ /* Remove this line */
 }
 
 /* -------------------------------
