@@ -52,8 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollHeight = document.body.scrollHeight;
         const clientHeight = window.innerHeight;
         
-        // Hide indicator when near bottom
-        if (scrollTop + clientHeight >= scrollHeight - 50) {
+        // More accurate bottom detection with better threshold
+        const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 5);
+        
+        console.log(`Scroll Top: ${scrollTop}, Client Height: ${clientHeight}, Scroll Height: ${scrollHeight}, Is At Bottom: ${isAtBottom}`);
+        
+        if (isAtBottom) {
             scrollIndicator.classList.remove('show');
         } else if (isScrollable()) {
             scrollIndicator.classList.add('show');
