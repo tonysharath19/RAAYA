@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollHeight = document.body.scrollHeight;
         const clientHeight = window.innerHeight;
         
-        // More accurate bottom detection with better threshold
-        const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 5);
+    // Use the same logic as in index.html
+    const isAtBottom = (scrollTop + clientHeight) >= scrollHeight;
         
         console.log(`Scroll Top: ${scrollTop}, Client Height: ${clientHeight}, Scroll Height: ${scrollHeight}, Is At Bottom: ${isAtBottom}`);
         
