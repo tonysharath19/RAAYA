@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Use the same logic as in index.html
     const isAtBottom = (scrollTop + clientHeight) >= scrollHeight;
         
-        console.log(`Scroll Top: ${scrollTop}, Client Height: ${clientHeight}, Scroll Height: ${scrollHeight}, Is At Bottom: ${isAtBottom}`);
+console.log(`Scroll Top: ${scrollTop}, Client Height: ${clientHeight}, Scroll Height: ${scrollHeight}, Is At Bottom: ${isAtBottom}`);
+console.log("Scroll Indicator visibility toggled");
         
         if (isAtBottom) {
             scrollIndicator.classList.remove('show');
