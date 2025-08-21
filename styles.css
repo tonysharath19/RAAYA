@@ -34,7 +34,7 @@ body, html {
 ================================ */
 .header {
     width: 100%;
-    background-color: #111;
+    background-color:#111;
     padding: 1rem 2rem;
     position: fixed;
     top: 0;
@@ -51,7 +51,7 @@ body, html {
 
 .logo {
     height: 50px;
-    filter: brightness(0) invert(1);
+    /* Removed filter that was causing white square issue */
 }
 
 .home-button {
