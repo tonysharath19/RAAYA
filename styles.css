@@ -5,6 +5,7 @@
     --gold: #CBA135;         /* Rich luxurious gold */
     --gold-hover: #B79027;   /* Darker gold for hover */
     --text-light: #f5f5dc;   /* Off-white for body text */
+    --header-height: 97px;   /* Calculated: 65px logo + 2rem padding (32px) = 97px */
 }
 
 /* ===============================
@@ -34,7 +35,7 @@ body, html {
 ================================ */
 .header {
     width: 100%;
-    background-color:#111;
+    background-color:#000;
     padding: 1rem 2rem;
     position: fixed;
     top: 0;
@@ -50,7 +51,8 @@ body, html {
 }
 
 .logo {
-    height: 50px;
+    height: 65px;
+    /* Increased size to fit better in header pane */
     /* Removed filter that was causing white square issue */
 }
 
@@ -382,7 +384,7 @@ body, html {
    Footer
 ================================ */
 .footer {
-    background-color: #111;
+    background-color: #000;
     padding: 1.5rem 2rem;
     text-align: center;
     margin-top: auto;

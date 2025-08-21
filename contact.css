@@ -12,6 +12,7 @@
     align-items: center;
     padding: 2rem;
     background: #111;
+    padding-top: 97px; /* Account for fixed header height */
 }
 
 .contact-container {

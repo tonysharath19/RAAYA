@@ -1,8 +1,8 @@
 /* About Page Styles */
 .about-container {
-    padding: 120px 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 120px auto 60px auto;
+    padding: 0 2rem;
     text-align: justify;
     width: 100%;
     min-height: calc(100vh - 200px);
@@ -36,10 +36,11 @@
     color: #d4af37;
 }
 
-/* Responsive Design */
+/* Responsive Design - Matching portfolio.css pattern */
 @media (max-width: 768px) {
     .about-container {
-        padding: 100px 15px;
+        margin: 120px auto 60px auto;
+        padding: 2rem 1rem;
     }
     
     .about-title {
@@ -53,7 +54,8 @@
 
 @media (max-width: 480px) {
     .about-container {
-        padding: 80px 10px;
+        margin: 100px auto 60px auto;
+        padding: 1rem;
     }
     
     .about-title {

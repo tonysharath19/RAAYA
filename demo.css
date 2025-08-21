@@ -75,7 +75,7 @@ body {
 }
 
 .demo-button {
-    background: linear-gradient(135deg, #d4af37, #f4e4bc);
+    /*background: linear-gradient(135deg, #d4af37, #f4e4bc);*/
     color: #333;
     border: none;
     padding: 12px 8px;
@@ -94,7 +94,7 @@ body {
 .demo-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-    background: linear-gradient(135deg, #f4e4bc, #d4af37);
+    background: linear-gradient(135deg, #b08801, #d4af37);
 }
 
 .demo-button:active {

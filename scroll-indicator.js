@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollIndicator = document.createElement('div');
     scrollIndicator.className = 'scroll-indicator';
     scrollIndicator.innerHTML = `
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" class="scroll-icon">
             <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
         </svg>
     `;
@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.body.appendChild(scrollIndicator);
     console.log("Scroll Indicator added to the DOM");
+    
+    // State management
+    let isAtBottom = false;
     
     // Check if content is scrollable
     function isScrollable() {
@@ -40,42 +43,77 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Handle scroll indicator click
-    scrollIndicator.addEventListener('click', function() {
-        scrollToBottom();
-        scrollIndicator.classList.remove('show');
-    });
+    // Scroll to top
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     
-    // Handle scroll events
-    function handleScroll() {
+    // Update icon based on scroll position
+    function updateIcon() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollHeight = document.body.scrollHeight;
         const clientHeight = window.innerHeight;
         
-    // Use the same logic as in index.html
-    const isAtBottom = (scrollTop + clientHeight) >= scrollHeight;
+        isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 10); // 10px threshold
         
-console.log(`Scroll Top: ${scrollTop}, Client Height: ${clientHeight}, Scroll Height: ${scrollHeight}, Is At Bottom: ${isAtBottom}`);
-console.log("Scroll Indicator visibility toggled");
-        
+        const icon = scrollIndicator.querySelector('.scroll-icon');
         if (isAtBottom) {
-            scrollIndicator.classList.remove('show');
-        } else if (isScrollable()) {
+            // At bottom - show up arrow
+            icon.classList.add('up');
+            scrollIndicator.setAttribute('title', 'Scroll to top');
+        } else {
+            // Not at bottom - show down arrow
+            icon.classList.remove('up');
+            scrollIndicator.setAttribute('title', 'Scroll to bottom');
+        }
+    }
+    
+    // Handle scroll indicator click
+    scrollIndicator.addEventListener('click', function() {
+        if (isAtBottom) {
+            scrollToTop();
+        } else {
+            scrollToBottom();
+        }
+    });
+    
+    // Handle scroll events
+    function handleScroll() {
+        updateIcon();
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.body.scrollHeight;
+        const clientHeight = window.innerHeight;
+        
+        // Show/hide based on scroll position
+        if (scrollTop > 100 || isAtBottom) {
             scrollIndicator.classList.add('show');
+        } else if (!isScrollable()) {
+            scrollIndicator.classList.remove('show');
         }
     }
     
     // Initialize and add event listeners
     toggleScrollIndicator();
+    updateIcon();
+    
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', function() {
         toggleScrollIndicator();
+        updateIcon();
         handleScroll();
     });
     
     // Re-check on content changes
     const observer = new MutationObserver(function() {
-        setTimeout(toggleScrollIndicator, 100);
+        setTimeout(() => {
+            toggleScrollIndicator();
+            updateIcon();
+            handleScroll();
+        }, 100);
     });
     
     observer.observe(document.body, {

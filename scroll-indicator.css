@@ -28,15 +28,23 @@
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
-.scroll-indicator svg {
+.scroll-indicator .scroll-icon {
     width: 24px;
     height: 24px;
     fill: #333;
     transition: transform 0.3s ease;
 }
 
-.scroll-indicator:hover svg {
+.scroll-indicator .scroll-icon.up {
+    transform: rotate(180deg);
+}
+
+.scroll-indicator:hover .scroll-icon {
     transform: translateY(2px);
+}
+
+.scroll-indicator:hover .scroll-icon.up {
+    transform: rotate(180deg) translateY(2px);
 }
 
 @media (max-width: 768px) {
@@ -47,7 +55,7 @@
         height: 45px;
     }
     
-    .scroll-indicator svg {
+    .scroll-indicator .scroll-icon {
         width: 20px;
         height: 20px;
     }
@@ -61,7 +69,7 @@
         height: 40px;
     }
     
-    .scroll-indicator svg {
+    .scroll-indicator .scroll-icon {
         width: 18px;
         height: 18px;
     }
