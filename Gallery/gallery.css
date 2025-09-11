@@ -57,18 +57,24 @@
 
 .demo-display {
   display: grid;
-  grid-template-columns: repeat(4, 284px);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
   justify-content: center;
   margin: 1.5rem 0;
 }
+
+/* Each display image wrapper keeps 9:16 ratio */
 .demo-display img {
-  width: 160px;
-  height: 284px;
-  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 9 / 16;   /* Insta format */
+  object-fit: contain;    /* no cropping */
+  background: #000;       /* black filler bars */
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(203,161,53,0.2);
 }
+
+/* Remove the old hardcoded .landscape rules */
+
 .demo-display img.landscape {
   width: 284px;
   height: 160px;
@@ -392,3 +398,24 @@ body {
     padding-top: 80px;
   }
 }
+/* Make all DISPLAY images 9:16 like Instagram reels */
+.display-images .display {
+  position: relative;
+  width: 100%;
+  max-width: 350px;     /* size for desktop */
+  aspect-ratio: 9 / 16; /* lock to Insta reel format */
+  background: #000;     /* filler bars */
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 10px auto;    /* center with spacing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-images .display img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* full image inside, no cropping */
+}
+
