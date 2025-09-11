@@ -24,11 +24,14 @@ body, html {
     color: var(--gold);
 }
 
+/* Push content below fixed header */
 .page-content {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: var(--header-height); /* Prevent content hiding */
 }
+
 
 /* ===============================
    Header
@@ -510,3 +513,10 @@ body, html {
 .hamburger-menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
 }
+
+@media (max-width: 768px) {
+    :root {
+      --header-height: 80px; /* slightly taller header for mobile */
+    }
+  }
+  

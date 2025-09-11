@@ -333,25 +333,56 @@
 }
 
 
+/* Fixed header */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #fff; /* so content doesn’t show behind */
-  height: 60px; /* adjust based on your header size */
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
+  background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: 60px;
 }
 
-/* Push content down below the fixed header */
+/* Flexbox keeps items spaced */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* left + middle + right */
+  align-items: center;
+  height: 60px;
+  padding: 0 15px;
+}
+
+.hamburger {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #d4af37;
+  text-align: center;
+  flex: 1; /* pushes it to center */
+}
+
+.home-btn a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.home-btn a:hover {
+  color: #d4af37;
+}
+
+/* Prevent content hiding behind header */
 body {
   margin: 0;
-  padding-top: 60px; /* same as header height */
+  padding-top: 60px; /* matches header height */
 }
+
 
 @media (max-width: 768px) {
   header {
