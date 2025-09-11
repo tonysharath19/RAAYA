@@ -249,7 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('touchend', () => {
       dragging = false;
       if (Math.abs(currentX) > 100) {
-        card.style.transition = 'transform 0.3s ease'; card.style.transform = `translateX(${currentX > 0 ? 500 : -500}px) rotate(${currentX/10}deg)`; setTimeout(() => { currentIndex++; renderCard(currentIndex); }, 300);
+        const direction = currentX > 0 ? -1 : 1; // positive currentX is swipe right (previous), negative is left (next)
+        card.style.transition = 'transform 0.3s ease'; card.style.transform = `translateX(${currentX > 0 ? 500 : -500}px) rotate(${currentX/10}deg)`;
+        setTimeout(() => { currentIndex += direction; renderCard(currentIndex); }, 300);
       } else { card.style.transition = 'transform 0.3s ease'; card.style.transform = 'translateX(0) rotate(0)'; }
       currentX = 0;
     });

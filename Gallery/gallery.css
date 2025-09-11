@@ -324,4 +324,12 @@
   }
 }
 
+/* Mobile adjustments for header and footer clearance */
+@media (max-width: 768px) {
+  .section {
+    padding-top: 140px; /* Increased for header clearance */
+    padding-bottom: 6rem; /* Increased to prevent footer overlap */
+  }
+}
+
 
