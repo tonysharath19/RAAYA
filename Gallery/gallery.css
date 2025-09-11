@@ -333,3 +333,31 @@
 }
 
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff; /* so content doesn’t show behind */
+  height: 60px; /* adjust based on your header size */
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Push content down below the fixed header */
+body {
+  margin: 0;
+  padding-top: 60px; /* same as header height */
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 80px;
+  }
+  body {
+    padding-top: 80px;
+  }
+}
