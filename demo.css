@@ -5,12 +5,12 @@
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 97px 0 0 0; /* padding top equal to header height */
     overflow-x: hidden;
 }
 
 .demo-section {
-    padding: 120px 20px;
+    padding: 120px 20px 40px 20px;
     max-width: 100%;
     margin: 0 auto;
     text-align: center;
@@ -20,6 +20,8 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+
 
 .demo-container {
     background: rgba(255, 255, 255, 0.1);
@@ -75,9 +77,9 @@ body {
 }
 
 .demo-button {
-    /*background: linear-gradient(135deg, #d4af37, #f4e4bc);*/
-    color: #333;
-    border: none;
+    background-color: #111;
+    color: #cba135;
+    border: 2px solid #cba135;
     padding: 12px 8px;
     font-size: 0.9rem;
     font-family: 'Poppins', sans-serif;
@@ -85,16 +87,16 @@ body {
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
     width: 100%;
     min-width: 0;
     word-break: break-word;
 }
 
 .demo-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-    background: linear-gradient(135deg, #b08801, #d4af37);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(203,161,53,0.4);
+    background-color: #cba135;
+    color: #111;
 }
 
 .demo-button:active {
@@ -105,23 +107,23 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .demo-section {
-        padding: 60px 10px;
+        padding: 120px 10px 30px 10px;
     }
-    
+
     .demo-container {
         padding: 25px 15px;
         margin: 20px 10px;
         width: calc(100% - 20px);
     }
-    
+
     .demo-title {
         font-size: 2rem;
     }
-    
+
     .demo-text {
         font-size: 1.1rem;
     }
-    
+
     .demo-button {
         padding: 12px 8px;
         font-size: 0.85rem;
@@ -130,7 +132,7 @@ body {
 
 @media (max-width: 480px) {
     .demo-section {
-        padding: 40px 5px;
+        padding: 60px 5px 20px 5px;
     }
     
     .demo-container {

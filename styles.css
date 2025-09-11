@@ -65,6 +65,8 @@ body, html {
     cursor: pointer;
     font-weight: 500;
     transition: 0.3s;
+    z-index: 1100; /* Ensure button is above other elements */
+    position: relative;
 }
 
 .home-button:hover {
@@ -211,6 +213,8 @@ body, html {
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    z-index: 1100; /* Ensure buttons are above other elements */
+    position: relative;
 }
 
 .btn-gold {
@@ -240,6 +244,12 @@ body, html {
 }
 
 .btn-black:hover {
+    background-color: var(--gold);
+    color: #111;
+}
+
+
+.btn-demo:hover {
     background-color: var(--gold);
     color: #111;
 }

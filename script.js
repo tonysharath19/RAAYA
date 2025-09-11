@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeMenu = document.getElementById('closeMenu');
     const menuButtons = document.querySelectorAll('.menu-button');
     const homeButton = document.querySelector('.home-button');
+    // Remove or comment out demoButton related code to avoid multiple demo buttons
+    // const demoButton = document.querySelector('.btn-demo');
     const pageContent = document.querySelector('.page-content');
 
     // Hamburger menu toggle with logging
@@ -47,6 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Demo button navigation
+    // if (demoButton) {
+    //     demoButton.addEventListener('click', () => {
+    //         const link = demoButton.getAttribute('data-link');
+    //         if (link) {
+    //             window.location.href = link;
+    //         }
+    //     });
+    // }
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {

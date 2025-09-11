@@ -1,18 +1,10 @@
-# Scroll Button Implementation for demo.html
+c# Gallery Layout Fix and Enhancement TODO
 
-## Tasks to Complete:
-
-### 1. Include Scroll Indicator Files
-- [ ] Add scroll-indicator.css link to demo.html
-- [ ] Add scroll-indicator.js script to demo.html
-
-### 2. Verify Implementation
-- [ ] Test scroll button appears on page load
-- [ ] Test scroll button functionality (scroll to bottom/top)
-- [ ] Test responsive behavior
-- [ ] Test on mobile devices
-
-### 3. Optional Enhancements
-- [ ] Customize scroll button styling for demo page theme
-- [ ] Add smooth scroll behavior
-- [ ] Test with different content heights
+## Tasks
+- [x] Update Gallery/gallery.html: Add wrapper div for scrollable gallery and left/right arrow buttons
+- [x] Update Gallery/gallery.css: Change .gallery-grid to horizontal scroll, style arrows, add thumbnail container, style add/checkout buttons, adjust padding to prevent footer overlap
+- [x] Update Gallery/gallery.js: Modify generateGallery() to include thumbnails, add event listeners for arrows and thumbnails, add "Add" button to each card, implement checkout functionality to capture selected image names
+- [x] Test horizontal scrolling and navigation
+- [x] Ensure responsive design on mobile
+- [x] Verify no overlap with footer
+- [x] Optimize gallery for mobile screens with horizontal scroll and swipe gestures

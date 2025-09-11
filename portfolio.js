@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         personal: [
             "Wedding",
             "Engagement",
-            "Anniversary",
             "Birthday",
             "Baby Shower",
             "Naming Ceremony",

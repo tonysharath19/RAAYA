@@ -27,13 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'https://house-warming-demo.onrender.com';
     });
     
-    // E-card button functionality (existing)
+    // E-card button redirect to gallery.html
     ecardButton.addEventListener('click', function() {
-        // Create a simple alert for now (can be expanded later)
-        alert('E-card & Video Invites feature coming soon!');
-        
-        // Future enhancement: redirect to demo gallery or open modal
-        // window.location.href = 'demo-gallery.html';
+        window.location.href = 'Gallery/gallery.html';
     });
     
     // Add interactive hover effects for all buttons
@@ -48,17 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add loading state simulation for ecard button only
-    ecardButton.addEventListener('click', function() {
-        const originalText = this.textContent;
-        this.textContent = 'Loading...';
-        this.disabled = true;
-        
-        setTimeout(() => {
-            this.textContent = originalText;
-            this.disabled = false;
-        }, 2000);
-    });
+
 });
 
 // Smooth scroll behavior for any internal links

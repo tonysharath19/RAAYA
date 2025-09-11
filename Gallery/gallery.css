@@ -1,0 +1,327 @@
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: 120px 1rem 4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.section.active { display: flex; }
+.container { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.category-btn {
+  background: var(--gold);
+  color: #111;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.category-btn:hover, .subcategory-btn:hover { background: var(--gold-hover); }
+
+.subcategories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.subcategory-btn {
+  background-color: var(--gold);
+  color: #111;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+.subcategory-btn:hover { background-color: var(--gold-hover); }
+
+.demo-display {
+  display: grid;
+  grid-template-columns: repeat(4, 284px);
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.demo-display img {
+  width: 160px;
+  height: 284px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(203,161,53,0.2);
+}
+.demo-display img.landscape {
+  width: 284px;
+  height: 160px;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .demo-display {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .demo-display img {
+    width: 70%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}
+
+/* Card container always keeps 9:16 ratio */
+.card-stack-wrapper {
+  position: relative;
+  width: 380px;        /* desktop preview width */
+  aspect-ratio: 9 / 16; /* keeps reel format */
+  margin: 0 auto 1rem auto; /* added bottom margin to separate from counter */
+}
+
+.card-stack {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.invitation-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invitation-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ensures no cropping */
+}
+
+.invitation-card.landscape img {
+  object-fit: contain;
+}
+
+.progress-counter {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-align: center;
+}
+
+.selection-controls { text-align: center; margin: 0.5rem 0 1rem; }
+.add-btn {
+  background: #333;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.add-btn.added {
+  background: var(--gold);
+  color: #111;
+}
+
+.checkout-container { text-align: center; margin: 1rem 0; }
+.checkout-btn {
+  background: var(--gold);
+  color: #111;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.checkout-btn:hover { background: var(--gold-hover); }
+
+.card-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 1rem 0;
+}
+.nav-btn {
+  background: var(--gold);
+  color: #111;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.nav-btn:hover { background: var(--gold-hover); }
+
+.back-btn {
+  display: block;
+  margin: 1rem auto 0 auto;
+  background-color: #111;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.back-btn:hover { background-color: var(--gold); color: #111; }
+
+.selected-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1rem 0;
+}
+.selected-preview img {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--gold);
+}
+
+@media (max-width: 768px) {
+  .card-stack-wrapper { height: 500px; max-width: 280px; }
+  .invitation-card { flex: 0 0 80%; max-width: 280px; }
+}
+@media (max-width: 480px) {
+  .card-stack-wrapper { height: 400px; max-width: 225px; }
+  .invitation-card { flex: 0 0 90%; max-width: 225px; }
+  .invitation-card img { height: auto; }
+}
+
+/* ===== Contact Form Styling ===== */
+.form-card {
+  background: #1b1b1b;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+/* Style for form fields */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #D4AF37;
+}
+
+/* Inputs and selects consistent styling */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #D4AF37;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On focus (input + select) */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #d4af37; /* gold border */
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+/* Occasion dropdown specifically */
+#occasion {
+  appearance: none; /* removes browser’s default arrow */
+  background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23333'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%20width%3D'24'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E") no-repeat right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+
+.form-actions {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Gallery Layout */
+.gallery-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Desktop view: side controls */
+@media (min-width: 992px) {
+  .gallery-layout {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; /* vertical middle alignment */
+  }
+
+  .card-stack-wrapper {
+    flex: 0 0 380px; /* adjust preview size */
+    max-width: 380px;
+  }
+
+  .gallery-controls {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    justify-content: center; /* center vertically */
+  }
+
+  .gallery-controls button {
+    width: 100%;
+  }
+}
+
+/* Mobile controls neatly stacked */
+@media (max-width: 991px) {
+  .gallery-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem; /* spacing so it doesn't overlap counter */
+  }
+
+  .gallery-controls button {
+    width: 100%;
+  }
+}
+
+
