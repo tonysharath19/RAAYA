@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  
   let selectedCategory = '';
   let selectedSubcategory = '';
   let selectedImages = [];

@@ -1,5 +1,2 @@
-# TODO for Fixing Gallery Mobile Issues
-
-- [x] Add mobile media query to increase padding-top of .section for header clearance
-- [x] Increase padding-bottom of .section in mobile to prevent footer overlap with categories
-- [x] Fix swipe gesture direction in image previewer for mobile
+- [x] Reduce .section padding-top from 120px to 0px in Gallery/gallery.css to eliminate the gap between header and container.
+- [ ] Test the changes by opening Gallery/gallery.html in a browser to verify the gap is fixed.

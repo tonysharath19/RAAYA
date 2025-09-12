@@ -1,10 +1,10 @@
 .section {
   display: none;
   min-height: 100vh;
-  padding: 120px 1rem 4rem;
+  padding: 0px 1rem 4rem;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
 }
 .section.active { display: flex; }
@@ -13,7 +13,7 @@
 .section-title {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--gold);
 }
 
@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .category-btn {
   background: var(--gold);
@@ -333,7 +333,7 @@
 /* Mobile adjustments for header and footer clearance */
 @media (max-width: 768px) {
   .section {
-    padding-top: 140px; /* Increased for header clearance */
+    padding-top: 0px; /* Increased for header clearance */
     padding-bottom: 6rem; /* Increased to prevent footer overlap */
   }
 }
@@ -348,7 +348,7 @@ header {
   z-index: 1000;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  height: 60px;
+  height: 80px;
 }
 
 /* Flexbox keeps items spaced */
@@ -386,7 +386,17 @@ header {
 /* Prevent content hiding behind header */
 body {
   margin: 0;
-  padding-top: 60px; /* matches header height */
+  padding-top: 0;
+}
+
+.page-content {
+  padding-top: 60px !important;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding-top: 80px !important;
+  }
 }
 
 
@@ -395,9 +405,13 @@ body {
     height: 80px;
   }
   body {
-    padding-top: 80px;
+    padding-top: 10px;
   }
 }
+
+
+
+
 /* Make all DISPLAY images 9:16 like Instagram reels */
 .display-images .display {
   position: relative;
@@ -419,3 +433,22 @@ body {
   object-fit: contain;  /* full image inside, no cropping */
 }
 
+.gallery-container {
+  max-width: 1200px;
+  margin: 0px auto 60px auto; /* ✅ same as about page */
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    margin: 0 auto 60px auto; /* same as about, slightly smaller header space */
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    margin: 0 auto 60px auto; /* match About’s mobile style */
+    padding: 1rem;
+  }
+}
