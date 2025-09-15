@@ -1,7 +1,7 @@
 .section {
   display: none;
   min-height: 100vh;
-  padding: 0px 1rem 4rem;
+  padding: 20px 1rem 4rem;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -333,7 +333,7 @@
 /* Mobile adjustments for header and footer clearance */
 @media (max-width: 768px) {
   .section {
-    padding-top: 0px; /* Increased for header clearance */
+    padding-top: 30px; /* Increased for header clearance */
     padding-bottom: 6rem; /* Increased to prevent footer overlap */
   }
 }
@@ -405,7 +405,7 @@ body {
     height: 80px;
   }
   body {
-    padding-top: 30px;
+    padding-top: 20px;
   }
 }
 
