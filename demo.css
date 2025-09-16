@@ -5,12 +5,12 @@
 
 body {
     margin: 0;
-    padding: 132px 0 0 0; /* padding top equal to header height */
+    padding: 65px 0 0 0; /* padding top equal to header height */
     overflow-x: hidden;
 }
 
 .page-content {
-    padding-top: 20px !important;
+    padding-top: 30px !important;
 }
 
 .demo-section {
