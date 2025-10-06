@@ -1,2 +1,4 @@
-- [x] Reduce .section padding-top from 120px to 0px in Gallery/gallery.css to eliminate the gap between header and container.
-- [ ] Test the changes by opening Gallery/gallery.html in a browser to verify the gap is fixed.
+- Update categoriesData["recently-ordered"].display to 11
+- Add "CUSTOMER-P-09.png", "CUSTOMER-P-10.jpg", and "CUSTOMER-P-11.jpg" to imageFiles["recently-ordered"]["display"] array
+- Update the extension logic in buildSubcategoryPage for recently-ordered to set ext='png' for i=8 and i=9, 'jpg' otherwise
+- Test the gallery to ensure new images display when clicking clientele category

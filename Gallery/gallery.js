@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "baby-shower": { display: 3, premium: 25, special: 10 },
     "birthday": { display: 3, premium: 109, special: 35 },
     "corporate": { display: 23, premium: 100, special: 0 },
-    "recently-ordered": { display: 8, premium: 0, special: 0 },
+    "recently-ordered": { display: 11, premium: 0, special: 0 },
     "engagement": { display: 3, premium: 87, special: 16 },
     "floral": { display: 0, premium: 45, special: 19 },
     "house-warming": { display: 3, premium: 49, special: 14 },
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "special": [],
       "display": [
         "CUSTOMER-P-01.jpg","CUSTOMER-P-02.jpg","CUSTOMER-P-03.jpg","CUSTOMER-P-04.jpg",
-        "CUSTOMER-P-05.jpg","CUSTOMER-P-06.jpg","CUSTOMER-P-07.jpg","CUSTOMER-P-08.png"
+        "CUSTOMER-P-05.jpg","CUSTOMER-P-06.jpg","CUSTOMER-P-07.jpg","CUSTOMER-P-08.png","CUSTOMER-P-09.png","CUSTOMER-P-10.jpg","CUSTOMER-P-11.jpg"
       ]
     }
   };
@@ -160,9 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (selectedCategory === "upanayanam") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/UP-DISPLAY${i}.jpg`;
       else if (selectedCategory === "corporate") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/CORP-DISP/CORP-DISP-${String(i).padStart(2, '0')}.jpg`;
       else if (selectedCategory === "recently-ordered") {
-        const ext = i === 8 ? 'png' : 'jpg';
+        const ext = (i === 8 || i === 9) ? 'png' : 'jpg';
         img.src = `${baseImagePath}/${folderMap[selectedCategory]}/CUSTOMER-P-${String(i).padStart(2, '0')}.${ext}`;
       }
+      img.draggable = false;
+      img.addEventListener('contextmenu', e => e.preventDefault());
       demoDisplay.appendChild(img);
     }
 
@@ -220,6 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
     card.className = 'invitation-card';
     if (selectedCategory === "upanayanam" && (index === 4 || index === 5)) card.classList.add('landscape');
     card.innerHTML = `<img src="${t.src}" alt="${t.id}">`;
+    const img = card.querySelector('img');
+    img.draggable = false;
+    img.addEventListener('contextmenu', e => e.preventDefault());
     cardStack.appendChild(card);
 
     progressCounter.textContent = `Template ${index+1} of ${templates.length}`;
@@ -313,6 +318,8 @@ checkoutBtn.addEventListener('click', () => {
       }
       img.src = `${baseImagePath}/${folderMap[selectedCategory]}${subfolder}/${id}`;
       img.alt = id;
+      img.draggable = false;
+      img.addEventListener('contextmenu', e => e.preventDefault());
       const wrapper = document.createElement("div"); wrapper.style.position = "relative"; wrapper.style.display = "inline-block";
       img.style.display = "block"; img.style.cursor = "pointer";
       const removeBtn = document.createElement("button");
