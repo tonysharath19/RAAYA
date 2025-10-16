@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Wedding button redirect
     weddingButton.addEventListener('click', function() {
-        window.location.href = 'https://wedding-demo.onrender.com';
+        window.location.href = 'https://ashok-geetha-marriage-invite.onrender.com';
     });
     
     // House Warming button redirect
