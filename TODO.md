@@ -1,4 +1,4 @@
-- Update categoriesData["recently-ordered"].display to 11
-- Add "CUSTOMER-P-09.png", "CUSTOMER-P-10.jpg", and "CUSTOMER-P-11.jpg" to imageFiles["recently-ordered"]["display"] array
-- Update the extension logic in buildSubcategoryPage for recently-ordered to set ext='png' for i=8 and i=9, 'jpg' otherwise
-- Test the gallery to ensure new images display when clicking clientele category
+# TODO: Update Clientele Gallery to Include New Image
+
+- [x] Update categoriesData["recently-ordered"].display from 11 to 12 in gallery.js
+- [x] Add "CUSTOMER-P-12.jpg" to imageFiles["recently-ordered"]["display"] array in gallery.js
