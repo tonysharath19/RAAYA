@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Engagement button redirect
     engagementButton.addEventListener('click', function() {
-        window.location.href = 'https://engagement-invite.onrender.com';
+        window.location.href = 'https://ashok-geetha-engagement.onrender.com ';
     });
     
     // Wedding button redirect
