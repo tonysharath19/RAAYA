@@ -36,16 +36,70 @@ document.addEventListener("DOMContentLoaded", () => {
 // Add hover effects for contact buttons
 document.addEventListener('DOMContentLoaded', () => {
     const contactBtns = document.querySelectorAll('.contact-btn');
-    
+
     contactBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
-            btn.style.boxShadow = '0 5px 15px rgba(203, 161, 53, 0.4)';
+            btn.style.boxShadow = '0 5px 15px rgba(203,161,53,0.4)';
         });
-        
+
         btn.addEventListener('mouseleave', () => {
             btn.style.boxShadow = 'none';
         });
     });
+});
+
+// Carousel functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const carouselTrack = document.querySelector('.carousel-track');
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (!carouselTrack) return;
+
+    let currentIndex = 0;
+    const totalImages = 12;
+    let autoSlideInterval;
+
+    // Function to update carousel position
+    function updateCarousel() {
+        const translateY = -currentIndex * (100 / totalImages);
+        carouselTrack.style.transform = `translateY(${translateY}%)`;
+    }
+
+    // Next slide function
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateCarousel();
+    }
+
+    // Auto slide function
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 3000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    // Pause on hover
+    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+    carouselContainer.addEventListener('mouseleave', startAutoSlide);
+
+    // Start auto slide
+    startAutoSlide();
+
+    // Add scroll animation for designs section
+    const designsSection = document.querySelector('.designs-section');
+    if (designsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scrolled');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(designsSection);
+    }
 });
 
 
