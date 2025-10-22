@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Add smooth scroll behavior for contact buttons
     const contactBtns = document.querySelectorAll('.contact-btn');
-    
+
     contactBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             // Add click animation
@@ -28,8 +28,85 @@ document.addEventListener("DOMContentLoaded", () => {
         contactContainer.style.opacity = '0';
         contactContainer.style.transform = 'translateY(30px)';
         contactContainer.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-        
+
         observer.observe(contactContainer);
+    }
+
+    // Add scroll animation for designs section
+    const designsSection = document.querySelector('.designs-section');
+    if (designsSection) {
+        const designsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        designsSection.style.opacity = '0';
+        designsSection.style.transform = 'translateY(30px)';
+        designsSection.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+
+        designsObserver.observe(designsSection);
+    }
+
+    // Carousel functionality
+    const carouselTrack = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (carouselTrack && prevBtn && nextBtn) {
+        let currentIndex = 0;
+        const totalImages = 12;
+        let autoSlideInterval;
+
+        // Function to update carousel position
+        function updateCarousel() {
+            const translateX = -currentIndex * (100 / totalImages);
+            carouselTrack.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // Next button click
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateCarousel();
+            resetAutoSlide();
+        });
+
+        // Previous button click
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateCarousel();
+            resetAutoSlide();
+        });
+
+        // Auto-slide functionality
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalImages;
+                updateCarousel();
+            }, 3000); // Change slide every 3 seconds
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // Pause auto-slide on hover
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        // Resume auto-slide when mouse leaves
+        carouselContainer.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+
+        // Start auto-slide initially
+        startAutoSlide();
     }
 });
 
@@ -39,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     contactBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
-            btn.style.boxShadow = '0 5px 15px rgba(203,161,53,0.4)';
+            btn.style.boxShadow = '0 5px 15px rgba(203, 161, 53, 0.4)';
         });
 
         btn.addEventListener('mouseleave', () => {
@@ -48,59 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Carousel functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const carouselTrack = document.querySelector('.carousel-track');
-    const carouselContainer = document.querySelector('.carousel-container');
 
-    if (!carouselTrack) return;
-
-    let currentIndex = 0;
-    const totalImages = 12;
-    let autoSlideInterval;
-
-    // Function to update carousel position
-    function updateCarousel() {
-        const translateY = -currentIndex * (100 / totalImages);
-        carouselTrack.style.transform = `translateY(${translateY}%)`;
-    }
-
-    // Next slide function
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalImages;
-        updateCarousel();
-    }
-
-    // Auto slide function
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 3000);
-    }
-
-    function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-    }
-
-    // Pause on hover
-    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
-    carouselContainer.addEventListener('mouseleave', startAutoSlide);
-
-    // Start auto slide
-    startAutoSlide();
-
-    // Add scroll animation for designs section
-    const designsSection = document.querySelector('.designs-section');
-    if (designsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('scrolled');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        observer.observe(designsSection);
-    }
-});
 
 
 

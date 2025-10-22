@@ -220,6 +220,24 @@ body, html {
     position: relative;
 }
 
+/* Tutorial Text */
+.tutorial-text {
+    margin-top: 1.5rem;
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    text-align: center;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Hide tutorial text on desktop/tablet, show only on mobile */
+@media (min-width: 769px) {
+    .tutorial-text {
+        display: none;
+    }
+}
+
 .btn-gold {
     background-color: var(--gold);
     color: #111;
@@ -394,6 +412,54 @@ body, html {
 }
 
 /* ===============================
+   Floating Video Container (9:16 aspect ratio, middle-right position on desktop, below content on mobile)
+================================ */
+.floating-video-container {
+    position: fixed;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    width: 225px; /* 9:16 aspect ratio width */
+    height: 400px; /* 9:16 aspect ratio height */
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(203, 161, 53, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    border: 2px solid var(--gold);
+    margin: 2rem auto 0; /* Add spacing back for desktop fixed positioning */
+}
+
+.video-header {
+    background: var(--gold);
+    color: #111;
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(203, 161, 53, 0.3);
+}
+
+.video-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.video-wrapper {
+    width: 100%;
+    height: calc(100% - 45px); /* Subtract header height */
+    position: relative;
+}
+
+.floating-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #111;
+    border-radius: 0 0 13px 13px;
+}
+
+/* ===============================
    Footer
 ================================ */
 .footer {
@@ -423,36 +489,47 @@ body, html {
 }
 
 /* ===============================
-   Responsive Styles
+   Responsive Styles for Floating Video Container
 ================================ */
 @media (max-width: 1024px) {
     .header-container {
         padding: 0 1rem;
     }
-    
+
     .home-button {
         padding: 0.4rem 0.8rem;
         font-size: 0.9rem;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtext {
         font-size: 1.1rem;
     }
-    
+
     .about-title, .services-title {
         font-size: 2rem;
     }
-    
+
     .about-text, .service-card p {
         font-size: 1rem;
     }
-    
+
     .services-grid {
         gap: 1.5rem;
+    }
+
+    /* Adjust floating video position for tablets */
+    .floating-video-container {
+        width: 200px;
+        height: 355px; /* Maintain 9:16 ratio */
+        right: 20px;
+    }
+
+    .video-header h3 {
+        font-size: 0.9rem;
     }
 }
 
@@ -471,14 +548,36 @@ body, html {
         padding: 1rem 2rem;
         min-height: 60px;
     }
+
+    /* Adjust floating video for smaller tablets/mobile landscape */
+    .floating-video-container {
+        width: 180px;
+        height: 320px; /* Maintain 9:16 ratio */
+        right: 15px;
+        top: 60%; /* Move slightly lower to avoid header overlap */
+    }
+
+    .video-header h3 {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        height: auto; /* Allow hero to size naturally on mobile */
+        min-height: 100vh; /* Minimum full height */
+        padding-bottom: 2rem; /* Add bottom padding for video integration */
+    }
+
     .hero-title {
         font-size: 1.8rem;
     }
     .hero-subtext {
         font-size: 0.95rem;
+    }
+    .tutorial-text {
+        font-size: 1rem;
     }
     .about-title, .services-title {
         font-size: 1.5rem;
@@ -498,6 +597,26 @@ body, html {
         font-size: 1.3rem;
         padding: 0.9rem 1.8rem;
         min-height: 55px;
+    }
+
+    /* Integrate floating video with hero section on mobile */
+    .floating-video-container {
+        position: static; /* Remove fixed positioning */
+        transform: none; /* Remove transform */
+        width: 100%; /* Full width */
+        max-width: 300px; /* Max width for readability */
+        height: 533px; /* Maintain 9:16 ratio for full width */
+        margin: 20px auto 40px auto; /* Reduced top margin, added bottom margin */
+        right: auto; /* Reset right positioning */
+        top: auto; /* Reset top positioning */
+        background: linear-gradient(135deg, #111 0%, #222 100%); /* Match hero background */
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(203, 161, 53, 0.3);
+    }
+
+    .video-header h3 {
+        font-size: 1rem; /* Larger text for mobile */
+        padding: 12px 15px; /* More padding */
     }
 }
 

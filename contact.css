@@ -126,10 +126,9 @@
 
 /* Our Designs Carousel Section */
 .designs-section {
-    margin-top: 3rem;
     width: 100%;
-    max-width: 800px;
-    text-align: center;
+    max-width: 600px;
+    margin-top: 3rem;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -143,39 +142,72 @@
 .designs-section h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    color: var(--gold);
     margin-bottom: 2rem;
+    color: var(--gold);
+    text-align: center;
 }
 
 .carousel-container {
     position: relative;
-    width: 225px; /* 9:16 aspect ratio - 225px width = 400px height */
-    height: 400px;
-    margin: 0 auto;
+    width: 100%;
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(203, 161, 53, 0.2);
+    box-shadow: 0 8px 32px rgba(203, 161, 53, 0.3);
+    border: 2px solid var(--gold);
 }
 
 .carousel-wrapper {
     width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
 .carousel-track {
     display: flex;
-    flex-direction: column;
-    height: calc(100% * 12); /* 12 images */
+    width: 1200%; /* 12 images × 100% each */
     transition: transform 0.5s ease-in-out;
 }
 
 .carousel-track img {
-    width: 100%;
-    height: calc(100% / 12);
-    object-fit: contain; /* Changed from cover to contain to prevent cropping */
+    width: 8.333%; /* 100% / 12 images */
+    height: 300px;
+    object-fit: cover;
     flex-shrink: 0;
-    background: #111; /* Add background to fill any empty space */
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gold);
+    color: #111;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(203, 161, 53, 0.4);
+}
+
+.carousel-btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(203, 161, 53, 0.5);
+}
+
+.carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
 }
 
 /* Responsive styles */
@@ -229,12 +261,22 @@
         padding: 0.8rem 1.2rem;
     }
 
-    .designs-section h2 {
-        font-size: 1.5rem;
+    .designs-section {
+        margin-top: 2rem;
     }
 
-    .carousel-container {
-        width: 187.5px; /* 9:16 aspect ratio for mobile */
-        height: 333.33px;
+    .designs-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .carousel-track img {
+        height: 200px;
+    }
+
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
     }
 }
