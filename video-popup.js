@@ -35,12 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
         tutorialVideo.controlsList.add('nodownload');
     });
 
+    // Set video source based on screen width
+    function setVideoSource() {
+        const isMobile = window.innerWidth <= 768;
+        const videoSource = isMobile ? '1.mp4' : '2.mp4';
+        tutorialVideo.src = videoSource;
+    }
+
+    // Set initial source
+    setVideoSource();
+
+    // Update source on window resize
+    window.addEventListener('resize', setVideoSource);
+
     // Additional security measures
     Object.defineProperty(tutorialVideo, 'src', {
         get: function() { return this.getAttribute('src'); },
         set: function(value) {
-            // Only allow setting if it's the expected video
-            if (value === 'Raaya_Tutorial.mp4') {
+            // Allow both mobile and desktop video sources
+            if (value === '1.mp4' || value === '2.mp4') {
                 this.setAttribute('src', value);
             }
         }

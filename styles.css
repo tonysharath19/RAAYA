@@ -412,15 +412,15 @@ body, html {
 }
 
 /* ===============================
-   Floating Video Container (9:16 aspect ratio, middle-right position on desktop, below content on mobile)
+   Floating Video Container (9:16 aspect ratio on mobile, 16:9 horizontal on desktop)
 ================================ */
 .floating-video-container {
     position: fixed;
     top: 50%;
     right: 30px;
     transform: translateY(-50%);
-    width: 225px; /* 9:16 aspect ratio width */
-    height: 400px; /* 9:16 aspect ratio height */
+    width: 320px; /* 16:9 aspect ratio width for desktop */
+    height: 180px; /* 16:9 aspect ratio height for desktop */
     background: #111;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(203, 161, 53, 0.3);
@@ -433,16 +433,17 @@ body, html {
 .video-header {
     background: var(--gold);
     color: #111;
-    padding: 10px 15px;
+    padding: 8px 12px;
     text-align: center;
     border-bottom: 1px solid rgba(203, 161, 53, 0.3);
 }
 
 .video-header h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin: 0;
     font-weight: 600;
+    line-height: 1.2;
 }
 
 .video-wrapper {

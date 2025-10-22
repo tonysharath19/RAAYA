@@ -36,6 +36,24 @@
     </div>
 </main>
 
+<!-- Floating Video Container -->
+<div class="floating-video-container">
+    <div class="video-header">
+        <h3>How our website works!</h3>
+    </div>
+    <div class="video-wrapper">
+        <video id="tutorialVideo" controls controlsList="nodownload" oncontextmenu="return false;" disablePictureInPicture>
+            <source src="Raaya_tutorials.mp4" type="video/mp4" media="(max-width: 768px)">
+            <source src="Raaya_Tutorial_Landscape.mp4" type="video/mp4" media="(min-width: 769px)">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Background Audio -->
+        <audio id="tutorialBGM" preload="none">
+            <source src="tutorial_bgm.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</div>
+
 <footer class="footer">
     <div class="footer-content">
         <p>&copy; 2025 Raaya. All rights reserved.</p>
@@ -56,6 +74,7 @@
 </nav>
 
 <script src="script.js"></script>
-</body>
 <script src="scroll-indicator.js"></script>
+<script src="video-popup.js"></script>
+</body>
 </html>
