@@ -35,16 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const categoriesData = {
-    "baby-shower": { display: 3, premium: 25, special: 10 },
-    "birthday": { display: 3, premium: 109, special: 35 },
+    "baby-shower": { display: 3, premium: 26, special: 10 },
+    "birthday": { display: 3, premium: 110, special: 35 },
     "corporate": { display: 23, premium: 100, special: 0 },
     "recently-ordered": { display: 12, premium: 0, special: 0 },
     "engagement": { display: 3, premium: 87, special: 16 },
     "floral": { display: 0, premium: 45, special: 19 },
-    "house-warming": { display: 3, premium: 49, special: 14 },
-    "naming-ceremony": { display: 3, premium: 32, special: 14 },
+    "house-warming": { display: 3, premium: 52, special: 14 },
+    "naming-ceremony": { display: 3, premium: 33, special: 14 },
     "royal": { display: 0, premium: 86, special: 33 },
-    "upanayanam": { display: 6, premium: 62, special: 0 },
+    "upanayanam": { display: 6, premium: 63, special: 0 },
     "wedding": { display: 3, premium: 78, special: 30 }
   };
 
@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "BBS-P-06.jpg","BBS-P-07.jpg","BBS-P-08.jpg","BBS-P-09.jpg","BBS-P-10.jpg",
         "BBS-P-11.jpg","BBS-P-12.jpg","BBS-P-13.jpg","BBS-P-14.jpg","BBS-P-15.jpg",
         "BBS-P-16.jpg","BBS-P-17.jpg","BBS-P-18.jpg","BBS-P-19.jpg","BBS-P-20.jpg",
-        "BBS-P-21.jpg","BBS-P-22.jpg","BBS-P-23.jpg","BBS-P-24.jpg","BBS-P-25.jpg"
+        "BBS-P-21.jpg","BBS-P-22.jpg","BBS-P-23.jpg","BBS-P-24.jpg","BBS-P-25.jpg",
+        "BBS-P-26.jpg"
       ],
       "special": [
         "BBS-S-01.jpg","BBS-S-02.jpg","BBS-S-03.jpg","BBS-S-04.jpg","BBS-S-05.jpg",
@@ -76,22 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
       "display": ["ENG-DISPLAY1.jpg","ENG-DISPLAY2.jpg","ENG-DISPLAY3.jpg"]
     },
     "birthday": {
-      "premium": Array.from({length: 109}, (_, i) => `BDY-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 110}, (_, i) => `BDY-P-${String(i+1).padStart(2, '0')}.jpg`),
       "special": Array.from({length: 35}, (_, i) => `BDY-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["BDAY-DISPLAY1.jpg","BDAY-DISPLAY2.jpg","BDAY-DISPLAY3.jpg"]
     },
     "house-warming": {
-      "premium": Array.from({length: 49}, (_, i) => `HW-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 52}, (_, i) => `HW-P-${String(i+1).padStart(2, '0')}.jpg`),
       "special": Array.from({length: 14}, (_, i) => `HW-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["HOUSE-DISPLAY1.jpg","HOUSE-DISPLAY2.jpg","HOUSE-DISPLAY3.jpg"]
     },
     "naming-ceremony": {
-      "premium": Array.from({length: 32}, (_, i) => `NC-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 33}, (_, i) => `NC-P-${String(i+1).padStart(2, '0')}.jpg`),
       "special": Array.from({length: 14}, (_, i) => `NC-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["NAMEC-DISPLAY1.jpg","NAMEC-DISPLAY2.jpg","NAMEC-DISPLAY3.jpg"]
     },
     "upanayanam": {
-      "premium": Array.from({length: 62}, (_, i) => `UPA-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 63}, (_, i) => i+1 === 21 ? `UPA-P-21.gif` : `UPA-P-${String(i+1).padStart(2, '0')}.jpg`),
       "special": [],
       "display": [
         "UP-DISPLAY1.jpg","UP-DISPLAY2.jpg","UP-DISPLAY3.jpg",
