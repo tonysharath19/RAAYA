@@ -152,25 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = document.querySelector('#subcategory .section-title');
     title.textContent = (selectedCategory === "recently-ordered") ? "Client Custom Designs" : "Choose Subcategory";
 
-    for (let i = 1; i <= cat.display; i++) {
+    const displayFiles = imageFiles[selectedCategory] && imageFiles[selectedCategory]["display"] || [];
+    displayFiles.forEach(fileName => {
       const img = document.createElement('img');
-      if (selectedCategory === "upanayanam" && (i === 5 || i === 6)) img.classList.add('landscape');
-      if (selectedCategory === "baby-shower") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/BS-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "wedding") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/WED-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "engagement") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/ENG-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "birthday") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/BDAY-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "house-warming") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/HOUSE-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "naming-ceremony") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/NAMEC-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "upanayanam") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/UP-DISPLAY${i}.jpg`;
-      else if (selectedCategory === "corporate") img.src = `${baseImagePath}/${folderMap[selectedCategory]}/CORP-DISP/CORP-DISP-${String(i).padStart(2, '0')}.jpg`;
-      else if (selectedCategory === "recently-ordered") {
-        const ext = (i === 8 || i === 9) ? 'png' : 'jpg';
-        img.src = `${baseImagePath}/${folderMap[selectedCategory]}/CUSTOMER-P-${String(i).padStart(2, '0')}.${ext}`;
-      }
+      if (selectedCategory === "upanayanam" && (fileName.includes('UP-DISPLAY5') || fileName.includes('UP-DISPLAY6'))) img.classList.add('landscape');
+      img.src = `${baseImagePath}/${folderMap[selectedCategory]}/${fileName}`;
       img.draggable = false;
       img.addEventListener('contextmenu', e => e.preventDefault());
       demoDisplay.appendChild(img);
-    }
+    });
 
     if (cat.premium > 0) {
       const btn = document.createElement('button');
