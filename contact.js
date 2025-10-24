@@ -101,6 +101,55 @@ document.addEventListener("DOMContentLoaded", () => {
         // Start auto-slide initially
         startAutoSlide();
     }
+
+    // Additional security for carousel images
+    const carouselImages = document.querySelectorAll('.carousel-track img');
+    carouselImages.forEach(img => {
+        // Prevent right-click context menu
+        img.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent drag and drop
+        img.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent long press on mobile devices
+        img.addEventListener('touchstart', (e) => {
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+            }
+
+            img.longPressTimeout = setTimeout(() => {
+                e.preventDefault();
+                return false;
+            }, 500);
+        });
+
+        img.addEventListener('touchend', (e) => {
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+                img.longPressTimeout = undefined;
+            }
+        });
+
+        img.addEventListener('touchmove', (e) => {
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+                img.longPressTimeout = undefined;
+            }
+        });
+
+        // Make images non-draggable and non-selectable
+        img.draggable = false;
+        img.style.userSelect = 'none';
+        img.style.webkitUserSelect = 'none';
+        img.style.MozUserSelect = 'none';
+        img.style.msUserSelect = 'none';
+    });
 });
 
 // Add hover effects for contact buttons

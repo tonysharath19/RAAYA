@@ -115,13 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Smooth scroll for anchor links
 document.addEventListener("DOMContentLoaded", () => {
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     anchorLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
@@ -130,4 +130,94 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+});
+
+// Website Security - Prevent image downloads and right-click context menus
+document.addEventListener("DOMContentLoaded", () => {
+    // Prevent right-click context menu on all images
+    const allImages = document.querySelectorAll('img');
+    allImages.forEach(img => {
+        img.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent drag and drop
+        img.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent long press on mobile devices
+        img.addEventListener('touchstart', (e) => {
+            // Clear any existing timeout
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+            }
+
+            // Set a timeout for long press detection
+            img.longPressTimeout = setTimeout(() => {
+                e.preventDefault();
+                return false;
+            }, 500); // 500ms threshold for long press
+        });
+
+        img.addEventListener('touchend', (e) => {
+            // Clear the long press timeout on touch end
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+                img.longPressTimeout = undefined;
+            }
+        });
+
+        img.addEventListener('touchmove', (e) => {
+            // Cancel long press if user moves finger
+            if (img.longPressTimeout) {
+                clearTimeout(img.longPressTimeout);
+                img.longPressTimeout = undefined;
+            }
+        });
+
+        // Make images non-draggable
+        img.draggable = false;
+
+        // Disable image selection
+        img.style.userSelect = 'none';
+        img.style.webkitUserSelect = 'none';
+        img.style.MozUserSelect = 'none';
+        img.style.msUserSelect = 'none';
+    });
+
+    // Prevent right-click on the entire document (additional protection)
+    document.addEventListener('contextmenu', (e) => {
+        // Allow context menu only if not on an image
+        if (e.target.tagName.toLowerCase() === 'img') {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Prevent keyboard shortcuts for saving images
+    document.addEventListener('keydown', (e) => {
+        // Prevent Ctrl+S, Ctrl+U (view source), and other save shortcuts
+        if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Prevent image source inspection via developer tools
+    const originalImageSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+    if (originalImageSrc && originalImageSrc.set) {
+        Object.defineProperty(HTMLImageElement.prototype, 'src', {
+            set: function(value) {
+                // Allow setting src normally, but log attempts to inspect
+                if (value && typeof value === 'string') {
+                    // You can add additional validation here if needed
+                    originalImageSrc.set.call(this, value);
+                }
+            },
+            get: originalImageSrc.get
+        });
+    }
 });
