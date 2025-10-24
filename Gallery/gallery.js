@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "baby-shower": { display: 3, premium: 26, special: 10 },
     "birthday": { display: 3, premium: 110, special: 35 },
     "corporate": { display: 23, premium: 100, special: 0 },
-    "recently-ordered": { display: 12, premium: 0, special: 0 },
+    "recently-ordered": { display: 25, premium: 0, special: 0 },
     "engagement": { display: 3, premium: 87, special: 16 },
     "floral": { display: 0, premium: 45, special: 19 },
     "house-warming": { display: 3, premium: 52, special: 14 },
@@ -119,7 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
       "special": [],
       "display": [
         "CUSTOMER-P-01.jpg","CUSTOMER-P-02.jpg","CUSTOMER-P-03.jpg","CUSTOMER-P-04.jpg",
-        "CUSTOMER-P-05.jpg","CUSTOMER-P-06.jpg","CUSTOMER-P-07.jpg","CUSTOMER-P-08.png","CUSTOMER-P-09.png","CUSTOMER-P-10.jpg","CUSTOMER-P-11.jpg","CUSTOMER-P-12.jpg"
+        "CUSTOMER-P-05.jpg","CUSTOMER-P-06.jpg","CUSTOMER-P-07.jpg","CUSTOMER-P-08.png","CUSTOMER-P-09.png","CUSTOMER-P-10.jpg","CUSTOMER-P-11.jpg","CUSTOMER-P-12.jpg",
+        "BABY-SHOWER-1.jpg","BABY-SHOWER-2.jpg","BIRTHDAY-1.jpg","BIRTHDAY-2.jpg",
+        "ENGAGEMENT-1.jpg","ENGAGEMENT-2.jpg","HOUSEWARMING-1.jpg","HOUSEWARMING-2.jpg",
+        "NAMING-CEREMONY-1.jpg","NAMING-CEREMONY-2.png","UPANAYANAM-1.jpg","WEDDING-1.jpg","WEDDING-2.jpg"
       ]
     }
   };

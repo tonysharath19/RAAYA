@@ -53,46 +53,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Carousel functionality
     const carouselTrack = document.querySelector('.carousel-track');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
     const carouselContainer = document.querySelector('.carousel-container');
 
-    if (carouselTrack && prevBtn && nextBtn) {
+    if (carouselTrack) {
         let currentIndex = 0;
-        const totalImages = 12;
+        const totalImages = 25;
         let autoSlideInterval;
+        let slideHeight = 300; // Default height
+
+        // Set slide height based on screen size
+        function setSlideHeight() {
+            slideHeight = window.innerWidth <= 480 ? 250 : 300;
+        }
+
+        setSlideHeight(); // Initial set
+
+        // Update on resize
+        window.addEventListener('resize', () => {
+            setSlideHeight();
+            updateCarousel(); // Recalculate position on resize
+        });
 
         // Function to update carousel position
         function updateCarousel() {
-            const translateX = -currentIndex * (100 / totalImages);
-            carouselTrack.style.transform = `translateX(${translateX}%)`;
+            const translateY = -currentIndex * slideHeight;
+            carouselTrack.style.transform = `translateY(${translateY}px)`;
         }
-
-        // Next button click
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalImages;
-            updateCarousel();
-            resetAutoSlide();
-        });
-
-        // Previous button click
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            updateCarousel();
-            resetAutoSlide();
-        });
 
         // Auto-slide functionality
         function startAutoSlide() {
             autoSlideInterval = setInterval(() => {
                 currentIndex = (currentIndex + 1) % totalImages;
                 updateCarousel();
-            }, 3000); // Change slide every 3 seconds
-        }
-
-        function resetAutoSlide() {
-            clearInterval(autoSlideInterval);
-            startAutoSlide();
+            }, 2000); // Change slide every 2 seconds
         }
 
         // Pause auto-slide on hover
