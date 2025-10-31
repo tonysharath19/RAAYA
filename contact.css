@@ -32,6 +32,31 @@
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* Desktop layout: contact on left, carousel on right */
+@media (min-width: 1024px) {
+    .contact-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        max-width: 1200px;
+        text-align: left;
+    }
+
+    .contact-content-wrapper {
+        flex: 1;
+        max-width: 400px;
+        margin-right: 3rem;
+        text-align: center;
+    }
+
+    .designs-section {
+        flex: 1;
+        max-width: 400px;
+        margin-top: 0;
+        margin-left: 3rem;
+    }
+}
+
 .contact-container.scrolled {
     opacity: 1;
     transform: translateY(0);
@@ -166,7 +191,7 @@
 .carousel-track {
     display: flex;
     flex-direction: column;
-    height: 7500px; /* 25 images × 300px each */
+    height: 8100px; /* 27 images × 300px each */
     transition: transform 0.5s ease-in-out;
 }
 

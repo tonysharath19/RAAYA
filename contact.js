@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (carouselTrack) {
         let currentIndex = 0;
-        const totalImages = 25;
+        const totalImages = 27;
         let autoSlideInterval;
         let slideHeight = 300; // Default height
 
