@@ -1,24 +1,181 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
+
+  // Generate or retrieve session ID
+  let sessionId = sessionStorage.getItem('gallerySessionId');
+  if (!sessionId) {
+    sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    sessionStorage.setItem('gallerySessionId', sessionId);
+  }
+
+  // Cart storage key
+  const cartKey = 'galleryCart_' + sessionId;
+
+  // Load cart from sessionStorage
+  function loadCart() {
+    const stored = sessionStorage.getItem(cartKey);
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  // Save cart to sessionStorage
+  function saveCart(cart) {
+    sessionStorage.setItem(cartKey, JSON.stringify(cart));
+  }
+
+  // Update cart icon visibility and count
+  function updateCartIcon(count) {
+    const cartIconGallery = document.getElementById('cartIconGallery');
+    const cartCountGallery = document.getElementById('cartCountGallery');
+    if (cartIconGallery && cartCountGallery) {
+      if (count > 0) {
+        cartIconGallery.style.display = 'flex';
+        cartCountGallery.textContent = count;
+      } else {
+        cartIconGallery.style.display = 'none';
+      }
+    }
+  }
+
+  // Open cart modal
+  function openCartModal() {
+    const cartModal = document.getElementById('cartModal');
+    const cartItemsContainer = document.getElementById('cartItems');
+    cartItemsContainer.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+    } else {
+      cartItems.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+
+        let subfolder = item.subcategory === "display" ? "" : `/${item.subcategory.toUpperCase()}`;
+        if (item.category === "corporate") {
+          if (item.subcategory === "premium") subfolder = "/CORPORATEP";
+          else if (item.subcategory === "display") subfolder = "/CORP-DISP";
+        }
+        const imgSrc = `${baseImagePath}/${folderMap[item.category]}${subfolder}/${item.id}`;
+
+        cartItem.innerHTML = `
+          <img src="${imgSrc}" alt="${item.id}">
+          <div class="cart-item-info">
+            <h4 class="cart-item-title">${item.category.replace('-', ' ').toUpperCase()} - ${item.subcategory.toUpperCase()}</h4>
+            <button class="cart-item-remove" data-id="${item.id}" data-category="${item.category}" data-subcategory="${item.subcategory}">Remove</button>
+          </div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+      });
+
+      // Add event listeners to remove buttons
+      document.querySelectorAll('.cart-item-remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.dataset.id;
+          const category = e.target.dataset.category;
+          const subcategory = e.target.dataset.subcategory;
+          cartItems = cartItems.filter(item => !(item.id === id && item.category === category && item.subcategory === subcategory));
+          saveCart(cartItems);
+          updateCartIcon(cartItems.length);
+          openCartModal(); // Refresh modal
+        });
+      });
+    }
+
+    // Update cart footer based on cart contents
+    const cartFooter = document.querySelector('.cart-footer');
+    if (cartItems.length === 0) {
+      cartFooter.innerHTML = '<button class="cart-close-btn" id="cartCloseBtnEmpty">Close</button>';
+      document.getElementById('cartCloseBtnEmpty').addEventListener('click', () => {
+        cartModal.classList.remove('active');
+      });
+    } else {
+      cartFooter.innerHTML = '<button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>';
+      // Add event listener to the newly created button
+      document.getElementById('checkoutBtn').addEventListener('click', () => {
+        document.getElementById('cartModal').classList.remove('active');
+        // Populate form with all selected designs
+        const allSelected = cartItems.map(item => item.id).join(', ');
+        document.getElementById('selectedDesign').value = allSelected;
+
+        // Pre-fill occasion based on first item or most common
+        const occasionSelect = document.getElementById("occasion");
+        if (occasionSelect && cartItems.length > 0) {
+          const labelMap = {
+            "baby-shower": "Baby Shower",
+            "wedding": "Wedding",
+            "engagement": "Engagement",
+            "birthday": "Birthday",
+            "house-warming": "House Warming",
+            "naming-ceremony": "Naming Ceremony",
+            "upanayanam": "Upanayanam",
+            "corporate": "Corporate",
+            "floral": "Floral",
+            "royal": "Royal"
+          };
+          occasionSelect.value = labelMap[cartItems[0].category] || "";
+        }
+
+        showSection('form');
+      });
+    }
+
+    cartModal.classList.add('active');
+  }
+  // Close cart modal
+  document.getElementById('cartCloseBtn').addEventListener('click', () => {
+    document.getElementById('cartModal').classList.remove('active');
+  });
+
+  // Proceed to checkout
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    document.getElementById('cartModal').classList.remove('active');
+    // Populate form with all selected designs
+    const allSelected = cartItems.map(item => item.id).join(', ');
+    document.getElementById('selectedDesign').value = allSelected;
+
+    // Pre-fill occasion based on first item or most common
+    const occasionSelect = document.getElementById("occasion");
+    if (occasionSelect && cartItems.length > 0) {
+      const labelMap = {
+        "baby-shower": "Baby Shower",
+        "wedding": "Wedding",
+        "engagement": "Engagement",
+        "birthday": "Birthday",
+        "house-warming": "House Warming",
+        "naming-ceremony": "Naming Ceremony",
+        "upanayanam": "Upanayanam",
+        "corporate": "Corporate",
+        "floral": "Floral",
+        "royal": "Royal"
+      };
+      occasionSelect.value = labelMap[cartItems[0].category] || "";
+    }
+
+    showSection('form');
+  });
+
+  // Add event listener to cart icon to open modal
+  const cartIconGallery = document.getElementById('cartIconGallery');
+  if (cartIconGallery) {
+    cartIconGallery.addEventListener('click', () => {
+      openCartModal();
+    });
+  }
+
   let selectedCategory = '';
   let selectedSubcategory = '';
-  let selectedImages = [];
-  let currentIndex = 0;
   let templates = [];
+  let cartItems = loadCart(); // Load persistent cart
 
   const sections = document.querySelectorAll('.section');
   const categoryBtns = document.querySelectorAll('.category-btn');
   const backBtns = document.querySelectorAll('.back-btn');
   const subcategoryButtons = document.getElementById('subcategoryButtons');
   const demoDisplay = document.getElementById('demoDisplay');
-  const cardStack = document.getElementById('cardStack');
-  const prevBtn = document.getElementById('prevCard');
-  const nextBtn = document.getElementById('nextCard');
-  const progressCounter = document.getElementById('progressCounter');
-  const checkoutBtn = document.getElementById('checkoutBtn');
-  const addBtn = document.getElementById('addBtn');
+  const productsGrid = document.getElementById('productsGrid');
   const selectedDesignInput = document.getElementById('selectedDesign');
   const contactForm = document.getElementById('contactForm');
+
+  // Update cart icon on load
+  updateCartIcon(cartItems.length);
 
   const folderMap = {
     "baby-shower": "baby-shower",
@@ -78,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "birthday": {
       "premium": Array.from({length: 110}, (_, i) => `BDY-P-${String(i+1).padStart(2, '0')}.jpg`),
-      "special": Array.from({length: 35}, (_, i) => `BDY-S-${String(i+1).padStart(2, '0')}.jpg`),
+      "special": Array.from({length: 34}, (_, i) => `BDY-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["BDAY-DISPLAY1.jpg","BDAY-DISPLAY2.jpg","BDAY-DISPLAY3.jpg"]
     },
     "house-warming": {
@@ -131,19 +288,56 @@ document.addEventListener('DOMContentLoaded', () => {
   function showSection(id) {
     sections.forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0); // Scroll to top when switching sections
   }
 
   categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       selectedCategory = btn.dataset.category;
-      buildSubcategoryPage();
-      showSection('subcategory');
+      loadGalleryPage();
+      showSection('gallery');
     });
   });
 
   backBtns.forEach(btn => {
     btn.addEventListener('click', () => showSection(btn.dataset.back));
   });
+
+  function loadGalleryPage() {
+    templates = [];
+    productsGrid.innerHTML = '';
+
+    // Add all images grid
+    const allImagesGrid = document.createElement('div');
+    allImagesGrid.className = 'products-grid';
+    productsGrid.appendChild(allImagesGrid);
+
+    // Load display images
+    const displayFiles = imageFiles[selectedCategory] && imageFiles[selectedCategory]["display"] || [];
+    displayFiles.forEach(fileName => {
+      let subPath = (selectedCategory === "corporate") ? "/CORP-DISP" : "";
+      templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}`, subcategory: "display" });
+    });
+
+    // Load premium templates
+    const premiumFiles = imageFiles[selectedCategory] && imageFiles[selectedCategory]["premium"] || [];
+    premiumFiles.forEach(fileName => {
+      let subPath = "/premium";
+      if (selectedCategory === "corporate") subPath = "/CORPORATEP";
+      else if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal" ].includes(selectedCategory)) subPath = "/PREMIUM";
+      templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}`, subcategory: "premium" });
+    });
+
+    // Load special templates
+    const specialFiles = imageFiles[selectedCategory] && imageFiles[selectedCategory]["special"] || [];
+    specialFiles.forEach(fileName => {
+      let subPath = "/special";
+      if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal" ].includes(selectedCategory)) subPath = "/SPECIAL";
+      templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}`, subcategory: "special" });
+    });
+
+    renderProductsGrid(allImagesGrid);
+  }
 
   function buildSubcategoryPage() {
     const cat = categoriesData[selectedCategory];
@@ -183,9 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadTemplates(type, count) {
     selectedSubcategory = type;
     templates = [];
-    selectedImages = [];
-    currentIndex = 0;
-    checkoutBtn.style.display = "none";
 
     const files = (imageFiles[selectedCategory] && imageFiles[selectedCategory][type]) || [];
 
@@ -200,66 +391,61 @@ document.addEventListener('DOMContentLoaded', () => {
       templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}` });
     });
 
-    renderCard(currentIndex);
+    renderProductsGrid();
     showSection('gallery');
   }
 
-  function renderCard(index) {
-    cardStack.innerHTML = '';
-    if (index < 0 || index >= templates.length) {
-      cardStack.innerHTML = `<p>No more templates</p>`;
-      progressCounter.textContent = '';
-      return;
-    }
-
-    const t = templates[index];
-    const card = document.createElement('div');
-    card.className = 'invitation-card';
-    if (selectedCategory === "upanayanam" && (index === 4 || index === 5)) card.classList.add('landscape');
-    card.innerHTML = `<img src="${t.src}" alt="${t.id}">`;
-    const img = card.querySelector('img');
-    img.draggable = false;
-    img.addEventListener('contextmenu', e => e.preventDefault());
-    cardStack.appendChild(card);
-
-    progressCounter.textContent = `Template ${index+1} of ${templates.length}`;
-
-    if (addBtn) {
-      if (selectedImages.includes(t.id)) {
-        addBtn.textContent = 'Remove';
-        addBtn.classList.add('added');
-      } else {
-        addBtn.textContent = 'Add';
-        addBtn.classList.remove('added');
+  function renderProductsGrid() {
+    // Clear the grid appropriately
+    const existingHeadings = productsGrid.querySelectorAll('.section-title');
+    const templatesHeading = Array.from(existingHeadings).find(h => h.textContent === 'TEMPLATES');
+    if (templatesHeading) {
+      // Remove everything after the TEMPLATES heading
+      let nextSibling = templatesHeading.nextSibling;
+      while (nextSibling) {
+        const temp = nextSibling.nextSibling;
+        productsGrid.removeChild(nextSibling);
+        nextSibling = temp;
       }
-      addBtn.onclick = () => {
-        if (selectedImages.includes(t.id)) selectedImages = selectedImages.filter(img => img !== t.id);
-        else selectedImages.push(t.id);
-        updateCheckoutList();
-        checkoutBtn.style.display = selectedImages.length ? "inline-block" : "none";
-        renderCard(currentIndex);
-      };
+    } else {
+      // No heading, clear entire grid to prevent duplication
+      productsGrid.innerHTML = '';
     }
-    enableSwipe(card);
-  }
 
-  function enableSwipe(card) {
-    let startX = 0, currentX = 0, dragging = false;
-    card.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; });
-    card.addEventListener('touchmove', e => { if (!dragging) return; currentX = e.touches[0].clientX - startX; card.style.transform = `translateX(${currentX}px) rotate(${currentX/20}deg)`; });
-    card.addEventListener('touchend', () => {
-      dragging = false;
-      if (Math.abs(currentX) > 100) {
-        const direction = currentX > 0 ? -1 : 1; // positive currentX is swipe right (previous), negative is left (next)
-        card.style.transition = 'transform 0.3s ease'; card.style.transform = `translateX(${currentX > 0 ? 500 : -500}px) rotate(${currentX/10}deg)`;
-        setTimeout(() => { currentIndex += direction; renderCard(currentIndex); }, 300);
-      } else { card.style.transition = 'transform 0.3s ease'; card.style.transform = 'translateX(0) rotate(0)'; }
-      currentX = 0;
+    templates.forEach(t => {
+      const productItem = document.createElement('div');
+      productItem.className = 'product-item';
+
+      const isInCart = cartItems.some(item => item.category === selectedCategory && item.subcategory === t.subcategory && item.id === t.id);
+
+      productItem.innerHTML = `
+        <img src="${t.src}" alt="${t.id}" draggable="false" oncontextmenu="return false;">
+        <button class="add-btn ${isInCart ? 'added' : ''}" data-id="${t.id}" data-subcategory="${t.subcategory}">${isInCart ? 'Remove' : 'Add'}</button>
+      `;
+
+      const img = productItem.querySelector('img');
+      img.addEventListener('contextmenu', e => e.preventDefault());
+
+      const btn = productItem.querySelector('.add-btn');
+      btn.addEventListener('click', () => {
+        const subcategory = btn.dataset.subcategory;
+        if (isInCart) {
+          cartItems = cartItems.filter(item => !(item.category === selectedCategory && item.subcategory === subcategory && item.id === t.id));
+          btn.textContent = 'Add';
+          btn.classList.remove('added');
+        } else {
+          cartItems.push({ category: selectedCategory, subcategory: subcategory, id: t.id });
+          btn.textContent = 'Remove';
+          btn.classList.add('added');
+        }
+        saveCart(cartItems);
+        updateCartIcon(cartItems.length);
+        renderProductsGrid(); // Re-render to update button states
+      });
+
+      productsGrid.appendChild(productItem);
     });
   }
-
-  prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; renderCard(currentIndex); } });
-  nextBtn.addEventListener('click', () => { if (currentIndex < templates.length - 1) { currentIndex++; renderCard(currentIndex); } });
 
   // Pre-fill occasion based on selected category
   const occasionSelect = document.getElementById("occasion");
@@ -277,29 +463,19 @@ document.addEventListener('DOMContentLoaded', () => {
     occasionSelect.value = labelMap[selectedCategory] || "";
   }
 
-  checkoutBtn.addEventListener('click', () => {
-    selectedDesignInput.value = selectedImages.join(', ');
-    updateCheckoutList();
-
-    // Pre-fill occasion
-    if (occasionSelect) {
-      occasionSelect.value = labelMap[selectedCategory] || "";
-    }
-
-    showSection('form');
-  });
-
   function updateCheckoutList() {
     const preview = document.getElementById("selectedPreview");
     preview.innerHTML = "";
+    const selectedImages = cartItems.map(item => item.id);
     selectedImages.forEach(id => {
       const img = document.createElement("img");
-      let subfolder = selectedSubcategory === "display" ? "" : `/${selectedSubcategory.toUpperCase()}`;
-      if (selectedCategory === "corporate") {
-        if (selectedSubcategory === "premium") subfolder = "/CORPORATEP";
-        else if (selectedSubcategory === "display") subfolder = "/CORP-DISP";
+      const item = cartItems.find(item => item.id === id);
+      let subfolder = item.subcategory === "display" ? "" : `/${item.subcategory.toUpperCase()}`;
+      if (item.category === "corporate") {
+        if (item.subcategory === "premium") subfolder = "/CORPORATEP";
+        else if (item.subcategory === "display") subfolder = "/CORP-DISP";
       }
-      img.src = `${baseImagePath}/${folderMap[selectedCategory]}${subfolder}/${id}`;
+      img.src = `${baseImagePath}/${folderMap[item.category]}${subfolder}/${id}`;
       img.alt = id;
       img.draggable = false;
       img.addEventListener('contextmenu', e => e.preventDefault());
@@ -308,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const removeBtn = document.createElement("button");
       removeBtn.textContent = "×"; removeBtn.title = "Remove";
       Object.assign(removeBtn.style, { position:"absolute", top:"-8px", right:"-8px", background:"rgba(0,0,0,0.7)", color:"#fff", border:"none", borderRadius:"50%", width:"22px", height:"22px", cursor:"pointer", fontSize:"14px" });
-      removeBtn.addEventListener('click', e => { e.stopPropagation(); selectedImages = selectedImages.filter(x => x !== id); updateCheckoutList(); checkoutBtn.style.display = selectedImages.length ? "inline-block" : "none"; renderCard(currentIndex); });
+      removeBtn.addEventListener('click', e => { e.stopPropagation(); cartItems = cartItems.filter(cartItem => cartItem.id !== id); saveCart(cartItems); updateCartIcon(cartItems.length); updateCheckoutList(); renderProductsGrid(); });
       wrapper.appendChild(img); wrapper.appendChild(removeBtn); preview.appendChild(wrapper);
     });
     selectedDesignInput.value = selectedImages.join(", ");

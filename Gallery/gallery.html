@@ -21,7 +21,12 @@
         <div class="logo-container">
             <img src="../raaya_final_logo.jpg" alt="Raaya Logo" class="logo" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
         </div>
+
         <button class="home-button" data-link="../index.html">Home</button>
+        <div class="cart-icon-gallery" id="cartIconGallery">
+            🛒
+            <span class="cart-count-gallery" id="cartCountGallery">0</span>
+        </div>
     </div>
 </header>
 
@@ -64,23 +69,10 @@
 <section id="gallery" class="section">
     <div class="container">
       <h2 class="section-title">Select Your Template</h2>
-  
-      <div class="gallery-layout">
-        <!-- Card Preview -->
-        <div class="card-stack-wrapper">
-          <div class="card-stack" id="cardStack"></div>
-        </div>
-        <p id="progressCounter" class="progress-counter"></p>
-  
-        <!-- Controls (side on desktop, bottom on mobile) -->
-        <div class="gallery-controls">
-          <button id="addBtn" class="add-btn">Add</button>
-          <button id="checkoutBtn" class="checkout-btn" style="display:none;">Checkout</button>
-          <button id="prevCard" class="nav-btn">&#10094; Prev</button>
-          <button id="nextCard" class="nav-btn">Next &#10095;</button>
-          <button class="back-btn" data-back="subcategory">Back</button>
-        </div>
-      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+
+      <button class="back-btn" data-back="home">Back</button>
     </div>
   </section>
   
@@ -131,8 +123,6 @@
             <option value="House Warming">House Warming</option>
             <option value="Upanayanam">Upanayanam</option>
             <option value="Corporate">Corporate</option>
-            <option value="Floral">Floral</option>
-            <option value="Royal">Royal</option>
           </select>
         </div>
       
@@ -146,6 +136,20 @@
       <button class="back-btn" data-back="gallery">Back to Gallery</button>
     </div>
   </section>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h3>Your Cart</h3>
+        <button class="cart-close-btn" id="cartCloseBtn">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
   
 
   <input type="hidden" name="_redirect" value="thankyou.html">
