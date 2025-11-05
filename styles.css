@@ -32,6 +32,13 @@ body, html {
     padding-top: 75px; /* Prevent content hiding */
 }
 
+/* Increase padding on mobile to ensure hero title is below header */
+@media (max-width: 768px) {
+    .page-content {
+        padding-top: 100px;
+    }
+}
+
 
 /* ===============================
    Header

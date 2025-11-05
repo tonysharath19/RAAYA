@@ -193,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const categoriesData = {
     "baby-shower": { display: 3, premium: 26, special: 10 },
-    "birthday": { display: 3, premium: 110, special: 35 },
+    "birthday": { display: 3, premium: 109, special: 34 },
     "corporate": { display: 23, premium: 100, special: 0 },
     "recently-ordered": { display: 27, premium: 0, special: 0 },
     "engagement": { display: 3, premium: 87, special: 16 },
     "floral": { display: 0, premium: 45, special: 19 },
-    "house-warming": { display: 3, premium: 52, special: 14 },
+    "house-warming": { display: 3, premium: 48, special: 14 },
     "naming-ceremony": { display: 3, premium: 33, special: 14 },
-    "royal": { display: 0, premium: 86, special: 33 },
+    "royal": { display: 0, premium: 85, special: 33 },
     "upanayanam": { display: 7, premium: 63, special: 0 },
     "wedding": { display: 3, premium: 78, special: 30 }
   };
@@ -224,7 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
       "display": ["BS-DISPLAY1.jpg","BS-DISPLAY2.jpg","BS-DISPLAY3.jpg"]
     },
     "wedding": {
-      "premium": Array.from({length: 78}, (_, i) => `WED-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 78}, (_, i) => {
+        if (i === 57) return null; // Exclude WED-P-58.jpg
+        return `WED-P-${String(i+1).padStart(2, '0')}.jpg`;
+      }).filter(Boolean),
       "special": Array.from({length: 30}, (_, i) => `WED-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["WED-DISPLAY1.jpg","WED-DISPLAY2.jpg","WED-DISPLAY3.jpg"]
     },
@@ -234,12 +237,15 @@ document.addEventListener('DOMContentLoaded', () => {
       "display": ["ENG-DISPLAY1.jpg","ENG-DISPLAY2.jpg","ENG-DISPLAY3.jpg"]
     },
     "birthday": {
-      "premium": Array.from({length: 110}, (_, i) => `BDY-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 109}, (_, i) => `BDY-P-${String(i+1).padStart(2, '0')}.jpg`),
       "special": Array.from({length: 34}, (_, i) => `BDY-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["BDAY-DISPLAY1.jpg","BDAY-DISPLAY2.jpg","BDAY-DISPLAY3.jpg"]
     },
     "house-warming": {
-      "premium": Array.from({length: 52}, (_, i) => `HW-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 52}, (_, i) => {
+        if ([18, 19, 49, 50].includes(i)) return null;
+        return `HW-P-${String(i+1).padStart(2, '0')}.jpg`;
+      }).filter(Boolean),
       "special": Array.from({length: 14}, (_, i) => `HW-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": ["HOUSE-DISPLAY1.jpg","HOUSE-DISPLAY2.jpg","HOUSE-DISPLAY3.jpg"]
     },
@@ -267,7 +273,10 @@ document.addEventListener('DOMContentLoaded', () => {
       "display": []
     },
     "royal": {
-      "premium": Array.from({length: 86}, (_, i) => `ROY-P-${String(i+1).padStart(2, '0')}.jpg`),
+      "premium": Array.from({length: 86}, (_, i) => {
+        if (i === 65) return null; // Exclude ROY-P-66.jpg
+        return `ROY-P-${String(i+1).padStart(2, '0')}.jpg`;
+      }).filter(Boolean),
       "special": Array.from({length: 33}, (_, i) => `ROY-S-${String(i+1).padStart(2, '0')}.jpg`),
       "display": []
     },
@@ -332,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const specialFiles = imageFiles[selectedCategory] && imageFiles[selectedCategory]["special"] || [];
     specialFiles.forEach(fileName => {
       let subPath = "/special";
-      if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal" ].includes(selectedCategory)) subPath = "/SPECIAL";
+      if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal","baby-shower" ].includes(selectedCategory)) subPath = "/SPECIAL";
       templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}`, subcategory: "special" });
     });
 
@@ -385,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (selectedCategory === "corporate") {
         if (type === "premium") subPath = "/CORPORATEP";
         else if (type === "display") subPath = "/CORP-DISP";
-      } else if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal" ].includes(selectedCategory) && type !== "display") {
+      } else if ([ "wedding","engagement","birthday","house-warming","naming-ceremony","upanayanam","floral","royal","baby-shower" ].includes(selectedCategory) && type !== "display") {
         subPath = subPath.toUpperCase();
       }
       templates.push({ id: fileName, src: `${baseImagePath}/${folderMap[selectedCategory]}${subPath}/${fileName}` });
