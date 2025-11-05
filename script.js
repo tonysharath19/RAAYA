@@ -132,8 +132,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Website Security - Prevent image downloads and right-click context menus
+// Website Security - Prevent right-click, long press, and image downloads across the entire site
 document.addEventListener("DOMContentLoaded", () => {
+    // Prevent right-click context menu on the entire document
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+
+    // Prevent long press on mobile devices across the entire document
+    document.addEventListener('touchstart', (e) => {
+        // Clear any existing timeout
+        if (document.longPressTimeout) {
+            clearTimeout(document.longPressTimeout);
+        }
+
+        // Set a timeout for long press detection
+        document.longPressTimeout = setTimeout(() => {
+            e.preventDefault();
+            return false;
+        }, 500); // 500ms threshold for long press
+    });
+
+    document.addEventListener('touchend', (e) => {
+        // Clear the long press timeout on touch end
+        if (document.longPressTimeout) {
+            clearTimeout(document.longPressTimeout);
+            document.longPressTimeout = undefined;
+        }
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        // Cancel long press if user moves finger
+        if (document.longPressTimeout) {
+            clearTimeout(document.longPressTimeout);
+            document.longPressTimeout = undefined;
+        }
+    });
+
     // Prevent right-click context menu on all images
     const allImages = document.querySelectorAll('img');
     allImages.forEach(img => {
@@ -148,36 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return false;
         });
 
-        // Prevent long press on mobile devices
-        img.addEventListener('touchstart', (e) => {
-            // Clear any existing timeout
-            if (img.longPressTimeout) {
-                clearTimeout(img.longPressTimeout);
-            }
-
-            // Set a timeout for long press detection
-            img.longPressTimeout = setTimeout(() => {
-                e.preventDefault();
-                return false;
-            }, 500); // 500ms threshold for long press
-        });
-
-        img.addEventListener('touchend', (e) => {
-            // Clear the long press timeout on touch end
-            if (img.longPressTimeout) {
-                clearTimeout(img.longPressTimeout);
-                img.longPressTimeout = undefined;
-            }
-        });
-
-        img.addEventListener('touchmove', (e) => {
-            // Cancel long press if user moves finger
-            if (img.longPressTimeout) {
-                clearTimeout(img.longPressTimeout);
-                img.longPressTimeout = undefined;
-            }
-        });
-
         // Make images non-draggable
         img.draggable = false;
 
@@ -188,16 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.msUserSelect = 'none';
     });
 
-    // Prevent right-click on the entire document (additional protection)
-    document.addEventListener('contextmenu', (e) => {
-        // Allow context menu only if not on an image
-        if (e.target.tagName.toLowerCase() === 'img') {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    // Prevent keyboard shortcuts for saving images
+    // Prevent keyboard shortcuts for saving images and viewing source
     document.addEventListener('keydown', (e) => {
         // Prevent Ctrl+S, Ctrl+U (view source), and other save shortcuts
         if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {

@@ -101,7 +101,7 @@ body, html {
 }
 
 /* ===============================
-   Overlay Side Menu - 50% width
+   Overlay Side Menu - 50% width on desktop, 75% on mobile
 ================================ */
 .overlay-menu {
     position: fixed;
@@ -121,6 +121,14 @@ body, html {
 
 .overlay-menu.active {
     left: 0;
+}
+
+/* Mobile responsive overlay menu - 75% width */
+@media (max-width: 768px) {
+    .overlay-menu {
+        width: 75%;
+        left: -75%;
+    }
 }
 
 /* Blur background when menu active */
@@ -176,6 +184,9 @@ body, html {
     min-height: 65px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(203, 161, 53, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu-button:hover {
